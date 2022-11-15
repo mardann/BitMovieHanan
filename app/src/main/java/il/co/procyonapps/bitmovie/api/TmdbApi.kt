@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface TmdbApi {
     
-    @GET("/3/movie/top_rated")
+    @GET("/3/movie/upcoming")
     suspend fun getUpcomingMovies(@Query("page") page:Int): NetworkResponse<MovieListResponse, Any>
     
     @GET("/3/movie/now_playing")

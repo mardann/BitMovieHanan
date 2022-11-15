@@ -22,6 +22,9 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        
+        binder!!.viewModel = viewModel
+        binder!!.lifecycleOwner = viewLifecycleOwner
         binder!!.rvMovies.apply {
             adapter = listAdapter
             (layoutManager as GridLayoutManager).apply {
@@ -30,7 +33,7 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
             }
         }
         
-        viewModel.recentMoviesPager.observe(viewLifecycleOwner){
+        viewModel.finalMovies.observe(viewLifecycleOwner){
             listAdapter.submitData(lifecycle,it)
         }
     
