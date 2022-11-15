@@ -1,6 +1,5 @@
 package il.co.procyonapps.bitmovie.ui.movielist
 
-import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.*
 import com.haroldadmin.cnradapter.NetworkResponse
@@ -28,6 +27,12 @@ class MovieListViewModel @Inject constructor(private val api: TmdbApi, private v
         .stateIn(viewModelScope, SharingStarted.Eagerly, FilterType.UP_COMING)
     
     private val favoritesFlow = dbDao.getAllFavoriteMovies().distinctUntilChanged()
+    
+    val favorites = favoritesFlow
+        .map {
+            it.map { schema -> BasicMovie.fromEntity(schema) }
+        }
+        .asLiveData()
     
     val finalMovies = filterFlow
         .distinctUntilChanged { old, new -> old == new }
@@ -67,7 +72,7 @@ class MovieListViewModel @Inject constructor(private val api: TmdbApi, private v
     }
     
     private fun movieFlow(apiCall: suspend (page: Int) -> NetworkResponse<MovieListResponse, Any>): Flow<PagingData<BasicMovie>> = Pager(PagingConfig(0/*isn't used by pager*/, prefetchDistance = 1), 1) {
-        MoviesPagerAdapter(apiCall)
+        MoviesPager(apiCall)
     }
         .flow
         .flowOn(Dispatchers.IO)

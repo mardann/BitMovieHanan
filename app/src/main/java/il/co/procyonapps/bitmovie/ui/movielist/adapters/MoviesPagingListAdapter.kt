@@ -1,25 +1,19 @@
-package il.co.procyonapps.bitmovie.ui.movielist
+package il.co.procyonapps.bitmovie.ui.movielist.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import il.co.procyonapps.bitmovie.databinding.MovieListItemBinding
 import il.co.procyonapps.bitmovie.model.BasicMovie
+import il.co.procyonapps.bitmovie.ui.movielist.MovieDiff
 
-class MoviesAdapter(val lifecycle: LifecycleOwner, val onItemClick: (movie: BasicMovie) -> Unit, val onFavoriteSelected: (movie: BasicMovie) -> Unit) : PagingDataAdapter<BasicMovie,
-        MoviesAdapter
-        .MovieViewHolder>
+class MoviesPagingListAdapter(val lifecycle: LifecycleOwner, val onItemClick: (movie: BasicMovie) -> Unit, val onFavoriteSelected: (movie: BasicMovie) -> Unit) : PagingDataAdapter<BasicMovie,
+        MovieViewHolder>
     (MovieDiff) {
     val TAG = this::class.simpleName ?: "Unspecified"
     
     
-    object MovieDiff : DiffUtil.ItemCallback<BasicMovie>() {
-        override fun areItemsTheSame(oldItem: BasicMovie, newItem: BasicMovie): Boolean = oldItem.id == newItem.id
-        override fun areContentsTheSame(oldItem: BasicMovie, newItem: BasicMovie): Boolean = oldItem == newItem
-    }
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binder = MovieListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -39,5 +33,5 @@ class MoviesAdapter(val lifecycle: LifecycleOwner, val onItemClick: (movie: Basi
         }
     }
     
-    inner class MovieViewHolder(val binder: MovieListItemBinding) : ViewHolder(binder.root)
+    
 }

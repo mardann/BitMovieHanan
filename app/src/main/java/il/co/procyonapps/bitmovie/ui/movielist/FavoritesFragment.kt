@@ -8,25 +8,27 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import il.co.procyonapps.bitmovie.R
+import il.co.procyonapps.bitmovie.databinding.FragmentFavoritesBinding
 import il.co.procyonapps.bitmovie.databinding.FragmentMovieListBinding
 import il.co.procyonapps.bitmovie.model.BasicMovie
+import il.co.procyonapps.bitmovie.ui.movielist.adapters.MoviesListAdapter
 import il.co.procyonapps.bitmovie.ui.movielist.adapters.MoviesPagingListAdapter
 import il.co.procyonapps.bitmovie.ui.viewBinding
 
 @AndroidEntryPoint
-class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
+class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     companion object{
-        fun newInstance(): MovieListFragment{
-        
-            val fragment = MovieListFragment()
-        
+        fun newInstance(): FavoritesFragment{
+            
+            val fragment = FavoritesFragment()
+            
             return fragment
         }
     }
     
     val viewModel: MovieListViewModel by viewModels({requireParentFragment()})
-    private val binder by viewBinding(FragmentMovieListBinding::bind)
-    private val listAdapter by lazy { MoviesPagingListAdapter(viewLifecycleOwner, onItemClick, onItemFavoriteClicked) }
+    private val binder by viewBinding(FragmentFavoritesBinding::bind)
+    private val listAdapter by lazy { MoviesListAdapter(viewLifecycleOwner, onItemClick, onItemFavoriteClicked) }
     private val onItemClick: (BasicMovie) -> Unit = {
 //        findNavController().navigate()
     }
@@ -37,9 +39,8 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
-        binder!!.viewModel = viewModel
-        binder!!.lifecycleOwner = viewLifecycleOwner
-        binder!!.rvMovies.apply {
+        
+        binder!!.rvFavorites.apply {
             adapter = listAdapter
             (layoutManager as GridLayoutManager).apply {
                 orientation = RecyclerView.VERTICAL
@@ -47,8 +48,8 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
             }
         }
         
-        viewModel.finalMovies.observe(viewLifecycleOwner) {
-            listAdapter.submitData(lifecycle, it)
+        viewModel.favorites.observe(viewLifecycleOwner) {
+            listAdapter.submitList(it)
         }
     }
 }

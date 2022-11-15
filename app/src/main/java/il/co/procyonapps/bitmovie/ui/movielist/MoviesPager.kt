@@ -7,7 +7,7 @@ import com.haroldadmin.cnradapter.NetworkResponse
 import il.co.procyonapps.bitmovie.api.responses.MovieListResponse
 import il.co.procyonapps.bitmovie.model.BasicMovie
 
-class MoviesPagerAdapter(val movieLoader: suspend (index: Int) -> NetworkResponse<MovieListResponse, Any>): PagingSource<Int, BasicMovie>() {
+class MoviesPager(val movieLoader: suspend (index: Int) -> NetworkResponse<MovieListResponse, Any>): PagingSource<Int, BasicMovie>() {
     private val TAG = this::class.simpleName ?: "Unspecified"
     private var pageIndex = 1
     override fun getRefreshKey(state: PagingState<Int, BasicMovie>): Int? {

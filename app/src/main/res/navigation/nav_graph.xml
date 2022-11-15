@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/MovieListFrag"
-        android:name="il.co.procyonapps.bitmovie.ui.movielist.MovieListFragment"
-        android:label="@string/first_fragment_label"
+        android:name="il.co.procyonapps.bitmovie.ui.movielist.ParentListsFragment"
+        android:label="Movies"
         tools:layout="@layout/fragment_movie_list">
 
         <action
