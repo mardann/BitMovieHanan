@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dagger.hilt.android.AndroidEntryPoint
 import il.co.procyonapps.bitmovie.databinding.FragmentSecondBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
+
+@AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
     private var _binding: FragmentSecondBinding? = null
     

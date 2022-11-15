@@ -6,9 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.*
 import androidx.viewbinding.ViewBinding
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
@@ -44,16 +42,17 @@ class FragmentViewBindingProperty<T : ViewBinding>(inline val binder: (View) -> 
         }
     }
     
-    private inner class BindingLifecycleObserver : LifecycleObserver {
+    private inner class BindingLifecycleObserver : LifecycleEventObserver {
         
         private val mainHandler = Handler(Looper.getMainLooper())
         
-        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-        fun onDestroy() {
-            
-            mainHandler.post {
-                Log.d(TAG, "onDestroy: nullify viewBinding for frag $ownerFrag")
-                viewBinding = null
+       
+        override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+            if(event == Lifecycle.Event.ON_DESTROY){
+                mainHandler.post {
+                    Log.d(TAG, "onDestroy: nullify viewBinding for frag $ownerFrag")
+                    viewBinding = null
+                }
             }
         }
     }

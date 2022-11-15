@@ -1,41 +1,39 @@
 package il.co.procyonapps.bitmovie.ui.movielist
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import il.co.procyonapps.bitmovie.R
-import il.co.procyonapps.bitmovie.databinding.FragmentFirstBinding
+import il.co.procyonapps.bitmovie.databinding.FragmentMovieListBinding
+import il.co.procyonapps.bitmovie.ui.viewBinding
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
-class MovieListFragment : Fragment() {
-    private var _binding: FragmentFirstBinding? = null
+@AndroidEntryPoint
+class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
     
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    val viewModel: MovieListViewModel by viewModels()
+    
+    val binder by viewBinding( FragmentMovieListBinding::bind )
+    val listAdapter by lazy { MoviesAdapter() }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        binder!!.rvMovies.apply {
+            adapter = listAdapter
+            (layoutManager as GridLayoutManager).apply {
+                orientation = RecyclerView.VERTICAL
+                this.spanCount = 3
+            }
         }
-    }
+        
+        viewModel.recentMovies.observe(viewLifecycleOwner){
+            listAdapter.submitList(it)
+        }
     
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        
     }
 }
