@@ -10,15 +10,20 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import il.co.procyonapps.bitmovie.R
 import il.co.procyonapps.bitmovie.databinding.FragmentMovieListBinding
+import il.co.procyonapps.bitmovie.model.BasicMovie
 import il.co.procyonapps.bitmovie.ui.viewBinding
 
 @AndroidEntryPoint
 class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
-    
     val viewModel: MovieListViewModel by viewModels()
-    
-    val binder by viewBinding( FragmentMovieListBinding::bind )
-    val listAdapter by lazy { MoviesAdapter() }
+    private val binder by viewBinding(FragmentMovieListBinding::bind)
+    private val listAdapter by lazy { MoviesAdapter(viewLifecycleOwner, onItemClick, onItemFavoriteClicked) }
+    private val onItemClick: (BasicMovie) -> Unit = {
+//        findNavController().navigate()
+    }
+    private val onItemFavoriteClicked: (BasicMovie) -> Unit = {
+        viewModel.switchMovieIsFavorite(it)
+    }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,10 +38,8 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
             }
         }
         
-        viewModel.finalMovies.observe(viewLifecycleOwner){
-            listAdapter.submitData(lifecycle,it)
+        viewModel.finalMovies.observe(viewLifecycleOwner) {
+            listAdapter.submitData(lifecycle, it)
         }
-    
-        
     }
 }

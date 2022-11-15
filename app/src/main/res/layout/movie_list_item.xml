@@ -45,6 +45,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Avengers: End Game" />
+        <ImageView
+            android:id="@+id/bt_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:src="@drawable/ic_baseline_star_24"
+            android:padding="6dp"
+            android:src="@{movie.favorite ? @drawable/ic_baseline_star_24 : @drawable/ic_baseline_star_border_24}"
+            app:tint="#FFD500"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
