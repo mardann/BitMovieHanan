@@ -2,13 +2,14 @@ package il.co.procyonapps.bitmovie.ui.movielist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import il.co.procyonapps.bitmovie.databinding.MovieListItemBinding
 import il.co.procyonapps.bitmovie.model.BasicMovie
 
-class MoviesAdapter: ListAdapter<BasicMovie, MoviesAdapter.MovieViewHolder>(MovieDiff) {
+class MoviesAdapter: PagingDataAdapter<BasicMovie, MoviesAdapter.MovieViewHolder>(MovieDiff) {
     
     object MovieDiff: DiffUtil.ItemCallback<BasicMovie>(){
         override fun areItemsTheSame(oldItem: BasicMovie, newItem: BasicMovie): Boolean = oldItem.id == newItem.id

@@ -30,8 +30,8 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
             }
         }
         
-        viewModel.recentMovies.observe(viewLifecycleOwner){
-            listAdapter.submitList(it)
+        viewModel.recentMoviesPager.observe(viewLifecycleOwner){
+            listAdapter.submitData(lifecycle,it)
         }
     
         

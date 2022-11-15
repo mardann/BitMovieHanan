@@ -29,8 +29,8 @@ data class MovieListResponse(
     data class Result(
         @Json(name = "adult")
         val adult: Boolean,
-        @Json(name = "backdrop_path")
-        val backdropPath: String,
+        @Json(name = "backdrop_path", ignore = true)
+        val backdropPath: String? = null,
         @Json(name = "genre_ids")
         val genreIds: List<Int>,
         @Json(name = "id")
