@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +29,8 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
     private val binder by viewBinding(FragmentMovieListBinding::bind)
     private val listAdapter by lazy { MoviesPagingListAdapter(viewLifecycleOwner, onItemClick, onItemFavoriteClicked) }
     private val onItemClick: (BasicMovie) -> Unit = {
-//        findNavController().navigate()
+        val dir = ParentListsFragmentDirections.actionFirstFragmentToSecondFragment(it.id)
+        requireParentFragment().findNavController().navigate(dir)
     }
     private val onItemFavoriteClicked: (BasicMovie) -> Unit = {
         viewModel.switchMovieIsFavorite(it)

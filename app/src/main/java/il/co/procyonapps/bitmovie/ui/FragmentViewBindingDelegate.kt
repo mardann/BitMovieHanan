@@ -46,7 +46,6 @@ class FragmentViewBindingProperty<T : ViewBinding>(inline val binder: (View) -> 
         
         private val mainHandler = Handler(Looper.getMainLooper())
         
-       
         override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
             if(event == Lifecycle.Event.ON_DESTROY){
                 mainHandler.post {
@@ -58,4 +57,4 @@ class FragmentViewBindingProperty<T : ViewBinding>(inline val binder: (View) -> 
     }
 }
 
-inline fun <reified T : ViewBinding> Fragment.viewBinding(noinline binder: (View) -> T): ReadOnlyProperty<Fragment, T?> = FragmentViewBindingProperty<T>(binder)
+inline fun <reified T : ViewBinding> Fragment.viewBinding(noinline binder: (View) -> T) = FragmentViewBindingProperty<T>(binder)

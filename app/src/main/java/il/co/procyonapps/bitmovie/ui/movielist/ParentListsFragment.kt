@@ -15,15 +15,15 @@ class ParentListsFragment: Fragment(R.layout.fragment_parent_movie_list) {
     
     val binder by viewBinding(FragmentParentMovieListBinding::bind)
     val viewModel: MovieListViewModel by viewModels()
-    val fragPager by lazy { FragmentPagerAdapter(this) }
+    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binder!!.pager.adapter = fragPager
+        binder!!.pager.adapter = FragmentPagerAdapter(this)
         
         TabLayoutMediator(binder!!.tabLayout, binder!!.pager){ tab, position ->
             tab.text = when (position){
-                0 -> "Movies"
-                1 -> "Favorites"
+                0 -> getString(R.string.movies)
+                1 -> getString(R.string.favorites)
                 else -> throw IllegalStateException("No definition for position $position")
             }
         }.attach()
