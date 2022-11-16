@@ -20,12 +20,12 @@ data class MovieDetailResponse(
     val homepage: String,
     @Json(name = "id")
     val id: Int,
-    @Json(name = "imdb_id")
-    val imdbId: String,
-    @Json(name = "original_language")
-    val originalLanguage: String,
-    @Json(name = "original_title")
-    val originalTitle: String,
+    @Json(name = "imdb_id", ignore = true)
+    val imdbId: String? = null,
+    @Json(name = "original_language", ignore = true)
+    val originalLanguage: String? = null,
+    @Json(name = "original_title", ignore = true)
+    val originalTitle: String? = null,
     @Json(name = "overview")
     val overview: String,
     @Json(name = "popularity")
