@@ -2,32 +2,35 @@ package il.co.procyonapps.bitmovie.ui.moviedetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import il.co.procyonapps.bitmovie.R
-import il.co.procyonapps.bitmovie.databinding.FragmentSecondBinding
+import il.co.procyonapps.bitmovie.databinding.FragmentMovieDetailsBinding
 import il.co.procyonapps.bitmovie.ui.viewBinding
+import javax.inject.Inject
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 
 @AndroidEntryPoint
-class MovieDetailFragment : Fragment(R.layout.fragment_second) {
+class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
+    private val args: MovieDetailFragmentArgs by navArgs()
+    private val movieId by lazy { args.movieId }
     
-    val args: MovieDetailFragmentArgs by navArgs()
-    private val binding by viewBinding(FragmentSecondBinding::bind)
-    
+    @Inject
+    lateinit var factory: MovieDetailsViewModel.AssistedFactory
+    val viewModel: MovieDetailsViewModel by viewModels { MovieDetailsViewModel.provideFactory(factory, movieId) }
+    private val binder by viewBinding(FragmentMovieDetailsBinding::bind)
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
-        binding!!.textviewSecond.text = "${args.movieId}"
+        binder!!.apply {
+            lifecycleOwner = viewLifecycleOwner
+        }
         
-        
+        viewModel.movieDetail.observe(viewLifecycleOwner){
+            binder?.movie = it
+        }
     }
-    
 }

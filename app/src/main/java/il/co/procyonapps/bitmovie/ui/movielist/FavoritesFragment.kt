@@ -31,7 +31,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private val binder by viewBinding(FragmentFavoritesBinding::bind)
     private val listAdapter by lazy { MoviesListAdapter(viewLifecycleOwner, onItemClick, onItemFavoriteClicked) }
     private val onItemClick: (BasicMovie) -> Unit = {
-        val dir = ParentListsFragmentDirections.actionFirstFragmentToSecondFragment(it.id)
+        val dir = ParentListsFragmentDirections.actionToMovieDetailFragment(it.id)
         requireParentFragment().findNavController().navigate(dir)
     }
     private val onItemFavoriteClicked: (BasicMovie) -> Unit = {

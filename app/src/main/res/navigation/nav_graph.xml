@@ -12,15 +12,20 @@
         tools:layout="@layout/fragment_movie_list">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/MovieDetailFrag" />
+            android:id="@+id/action_to_MovieDetailFragment"
+            app:destination="@id/MovieDetailFrag"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_bottom"
+           />
 
     </fragment>
     <fragment
         android:id="@+id/MovieDetailFrag"
         android:name="il.co.procyonapps.bitmovie.ui.moviedetails.MovieDetailFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:label="Movie Details"
+        tools:layout="@layout/fragment_movie_details">
 
 
         <argument

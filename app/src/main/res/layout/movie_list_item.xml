@@ -54,7 +54,7 @@
             tools:src="@drawable/ic_baseline_star_24"
             android:padding="6dp"
             android:src="@{movie.favorite ? @drawable/ic_baseline_star_24 : @drawable/ic_baseline_star_border_24}"
-            app:tint="#FFD500"/>
+            app:tint="@color/star_yellow"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
