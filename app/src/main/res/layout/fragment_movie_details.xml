@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<variable
-    name="movie"
-    type="il.co.procyonapps.bitmovie.model.MovieDetail" />
+
+        <variable
+            name="viewModel"
+            type="il.co.procyonapps.bitmovie.ui.moviedetails.MovieDetailsViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,13 +19,13 @@
 
         <ImageView
             android:id="@+id/iv_poster"
+            setImageUrl="@{viewModel.movieDetail.posterUrl}"
             android:layout_width="0dp"
             android:layout_height="240dp"
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="1:1.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            setImageUrl="@{movie.posterUrl}"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <RatingBar
@@ -32,23 +34,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/view_margin16"
-            android:rating="@{movie.rating / 2}"
             android:numStars="5"
             android:progressTint="@color/star_yellow"
-            tools:rating="4"
+            android:rating="@{viewModel.movieDetail.rating / 2}"
             app:layout_constraintBottom_toBottomOf="@id/iv_poster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/iv_poster" />
+            app:layout_constraintStart_toEndOf="@id/iv_poster"
+            tools:rating="4" />
 
         <TextView
             android:id="@+id/tv_release_year"
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
-            android:text="@{movie.yearOfRelease}"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/view_margin16"
             android:layout_marginBottom="@dimen/view_margin8"
+            android:text="@{viewModel.movieDetail.yearOfRelease}"
             app:layout_constraintBottom_toTopOf="@id/rating_bar"
             app:layout_constraintStart_toEndOf="@id/iv_poster"
             tools:text="1990" />
@@ -60,20 +62,38 @@
             android:layout_marginHorizontal="@dimen/view_margin16"
             android:ellipsize="end"
             android:maxLines="4"
-            android:text="@{movie.title}"
+            android:text="@{viewModel.movieDetail.title}"
             app:layout_constraintBottom_toTopOf="@id/tv_release_year"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_poster"
             tools:text="Never ending story" />
 
         <TextView
+            android:text="View Promo!"
+            android:drawableStart="@drawable/ic_outline_movie_24"
+            android:drawablePadding="24dp"
+            android:drawableTint="@color/link_color"
+            android:textColor="@color/link_color"
+            style="@style/TextAppearance.AppCompat.Title"
+            isGone="@{viewModel.video == null}"
+            android:paddingVertical="@dimen/view_margin8"
+            android:id="@+id/yt_video_player"
+            android:layout_marginTop="@dimen/view_margin16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/iv_poster"
+
+             />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/view_margin16"
             android:scrollbars="vertical"
-            android:text="@{movie.description}"
+            android:text="@{viewModel.movieDetail.description}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_poster"
+            app:layout_constraintTop_toBottomOf="@id/yt_video_player"
+
             app:layout_constraintVertical_bias="0.0"
             tools:layout_editor_absoluteX="-57dp"
             tools:text="@tools:sample/lorem/random" />

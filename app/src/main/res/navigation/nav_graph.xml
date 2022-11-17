@@ -31,5 +31,17 @@
         <argument
             android:name="movie_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_MovieDetailFrag_to_youTubeActivity"
+            app:destination="@id/youTubeActivity" />
     </fragment>
+    <activity
+        android:id="@+id/youTubeActivity"
+        android:name="il.co.procyonapps.bitmovie.ui.videoplayer.YouTubeActivity"
+        android:label="YouTubeActivity" >
+        <argument
+            android:name="video_id"
+            app:argType="string" />
+    </activity>
+
 </navigation>

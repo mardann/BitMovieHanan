@@ -1,10 +1,12 @@
 package il.co.procyonapps.bitmovie.ui
 
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.core.view.children
+import androidx.core.view.isGone
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
@@ -58,4 +60,9 @@ fun RadioGroup.setOnSelectedEnumListener(attrChange: InverseBindingListener) {
 fun RadioButton.enumOption(option: Enum<*>) {
     Log.d("RadioGroup binding", "SelectedEnum set radio button option: $option")
     setTag(R.id.filterSingleEnum, option)
+}
+
+@BindingAdapter("isGone")
+fun View.isGone(setIsGone: Boolean) {
+    isGone = setIsGone
 }
