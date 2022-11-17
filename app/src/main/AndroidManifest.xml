@@ -32,7 +32,10 @@
                 android:value="" />
         </activity>
 
-        <activity android:name=".ui.videoplayer.YouTubeActivity"/>
+        <activity android:name=".ui.videoplayer.YouTubeActivity"
+            android:label="Promo Video"
+
+            />
     </application>
 
     <queries>
