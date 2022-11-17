@@ -41,12 +41,14 @@ android {
 
 dependencies {
 
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     def lifecycle_version = "2.6.0-alpha03"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.activity:activity-ktx:1.6.1"
     implementation "androidx.fragment:fragment-ktx:1.5.4"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
 
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
