@@ -6,7 +6,7 @@
     <Toolbar
         android:id="@+id/my_toolbar"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Promo Video"
+        app:title="@string/video_title"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"

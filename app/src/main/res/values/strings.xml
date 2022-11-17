@@ -11,5 +11,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="movies">Movies</string>
     <string name="favorites">Favorites</string>
+    <string name="video_title">Promo Video</string>
+    <string name="view_promo">View Promo!</string>
 
 </resources>

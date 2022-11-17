@@ -11,6 +11,8 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.signature.ObjectKey
 import il.co.procyonapps.bitmovie.R
 
 @BindingAdapter("setImageUrl")
@@ -18,6 +20,7 @@ fun ImageView.setImage(url: String?) {
     if (url == null) return
     Glide.with(this)
         .load(url)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
         .error(R.drawable.placeholder)
         .placeholder(R.drawable.placeholder)
         .centerCrop()

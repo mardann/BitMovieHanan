@@ -36,6 +36,10 @@
             android:label="Promo Video"
 
             />
+        <service android:name=".jobscheduler.ClearCacheScheduler"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            />
     </application>
 
     <queries>

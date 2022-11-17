@@ -69,23 +69,23 @@
             tools:text="Never ending story" />
 
         <TextView
-            android:text="View Promo!"
-            android:drawableStart="@drawable/ic_outline_movie_24"
-            android:drawablePadding="24dp"
-            android:drawableTint="@color/link_color"
-            android:textColor="@color/link_color"
+            android:id="@+id/yt_video_player"
             style="@style/TextAppearance.AppCompat.Title"
             isGone="@{viewModel.video == null}"
-            android:paddingVertical="@dimen/view_margin8"
-            android:id="@+id/yt_video_player"
-            android:layout_marginTop="@dimen/view_margin16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/iv_poster"
+            android:layout_marginTop="@dimen/view_margin16"
+            android:drawablePadding="24dp"
+            android:paddingVertical="@dimen/view_margin8"
+            android:text="@string/view_promo"
+            android:textColor="@color/link_color"
+            app:drawableStartCompat="@drawable/ic_outline_movie_24"
+            app:drawableTint="@color/link_color"
 
-             />
+            app:layout_constraintTop_toBottomOf="@id/iv_poster" />
 
         <TextView
+            android:id="@+id/tv_description"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/view_margin16"
@@ -93,7 +93,6 @@
             android:text="@{viewModel.movieDetail.description}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/yt_video_player"
-
             app:layout_constraintVertical_bias="0.0"
             tools:layout_editor_absoluteX="-57dp"
             tools:text="@tools:sample/lorem/random" />
