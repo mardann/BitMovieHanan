@@ -16,18 +16,16 @@ import il.co.procyonapps.bitmovie.ui.viewBinding
 
 @AndroidEntryPoint
 class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
-    companion object{
-        fun newInstance(): MovieListFragment{
-        
+    companion object {
+        fun newInstance(): MovieListFragment {
             val fragment = MovieListFragment()
-        
+            
             return fragment
         }
     }
     
-    val viewModel: MovieListViewModel by viewModels({requireParentFragment()})
+    val viewModel: MovieListViewModel by viewModels({ requireParentFragment() })
     private val binder by viewBinding(FragmentMovieListBinding::bind)
-    private val listAdapter by lazy { MoviesPagingListAdapter(viewLifecycleOwner, onItemClick, onItemFavoriteClicked) }
     private val onItemClick: (BasicMovie) -> Unit = {
         val dir = ParentListsFragmentDirections.actionToMovieDetailFragment(it.id)
         requireParentFragment().findNavController().navigate(dir)
@@ -38,6 +36,7 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val listAdapter = MoviesPagingListAdapter(viewLifecycleOwner, onItemClick, onItemFavoriteClicked)
         
         binder!!.viewModel = viewModel
         binder!!.lifecycleOwner = viewLifecycleOwner
