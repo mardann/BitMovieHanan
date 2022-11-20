@@ -1,5 +1,6 @@
 package il.co.procyonapps.bitmovie.ui.movielist
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -38,13 +39,15 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
         super.onViewCreated(view, savedInstanceState)
         val listAdapter = MoviesPagingListAdapter(viewLifecycleOwner, onItemClick, onItemFavoriteClicked)
         
+        val columnCount = if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 3 else 5
+        
         binder!!.viewModel = viewModel
         binder!!.lifecycleOwner = viewLifecycleOwner
         binder!!.rvMovies.apply {
             adapter = listAdapter
             (layoutManager as GridLayoutManager).apply {
                 orientation = RecyclerView.VERTICAL
-                this.spanCount = 3
+                this.spanCount = columnCount
             }
         }
         
@@ -52,4 +55,5 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
             listAdapter.submitData(lifecycle, it)
         }
     }
+    
 }
