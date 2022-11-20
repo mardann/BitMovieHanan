@@ -23,7 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="240dp"
             android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="1:1.3"
+            app:layout_constraintDimensionRatio="1:1.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/backgrounds/scenic" />
